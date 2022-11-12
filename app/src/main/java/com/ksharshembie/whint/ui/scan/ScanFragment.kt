@@ -39,7 +39,29 @@ class ScanFragment : Fragment() {
         setupPermissions()
         codeScanner()
         viewVisibility()
+        binding.btnAdd.setOnClickListener {
+            if (!App.db.dao().isRowIsExist(binding.etArticleCode.text.toString())) {
+                App.db.dao().insert(
+                    Article(
+                        articleCode = binding.etArticleCode.text.toString()
+                    )
+                )
+                Toast.makeText(
+                    requireActivity(),
+                    "New Article found: ${binding.etArticleCode.text}",
+                    Toast.LENGTH_LONG
+                ).show()
 
+            } else {
+                Toast.makeText(
+                    requireActivity(),
+                    "Scan result: ${binding.etArticleCode.text}",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+            findNavController().navigateUp()
+        }
     }
 
 
