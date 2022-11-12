@@ -29,7 +29,12 @@
         tools:layout="@layout/fragment_stock_in" />
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.ksharshembie.whint.ScanFragment"
+        android:name="com.ksharshembie.whint.ui.scan.ScanFragment"
         android:label="Scan"
         tools:layout="@layout/fragment_scan" />
+    <fragment
+        android:id="@+id/stockInAddFragment"
+        android:name="com.ksharshembie.whint.ui.home.stockIn.StockInAddFragment"
+        android:label="Stock in Add"
+        tools:layout="@layout/fragment_stock_in_add" />
 </navigation>

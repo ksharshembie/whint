@@ -1,4 +1,4 @@
-package com.ksharshembie.whint
+package com.ksharshembie.whint.ui.scan
 
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -15,7 +15,9 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.ksharshembie.whint.App
 import com.ksharshembie.whint.databinding.FragmentScanBinding
+import com.ksharshembie.whint.local.room.Article
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -36,7 +38,10 @@ class ScanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupPermissions()
         codeScanner()
+        viewVisibility()
+
     }
+
 
     private fun codeScanner() {
         codeScanner = CodeScanner(requireActivity(), binding.scannerView)
@@ -51,10 +56,28 @@ class ScanFragment : Fragment() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             requireActivity().runOnUiThread {
-                Toast.makeText(requireActivity(), "Scan result: ${it.text}", Toast.LENGTH_LONG)
-                    .show()
+                if (!App.db.dao().isRowIsExist(it.text.toString())) {
+                    App.db.dao().insert(
+                        Article(
+                            articleCode = it.text.toString()
+                        )
+                    )
+                    Toast.makeText(
+                        requireActivity(),
+                        "New Article found: ${it.text}",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                } else {
+                    Toast.makeText(
+                        requireActivity(),
+                        "Scan result: ${it.text}",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }
+                findNavController().navigateUp()
             }
-            findNavController().navigateUp()
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             requireActivity().runOnUiThread {
@@ -109,6 +132,15 @@ class ScanFragment : Fragment() {
                     //successfull
                 }
             }
+        }
+    }
+
+    private fun viewVisibility() {
+        binding.btnManualAdd.setOnClickListener {
+            binding.scannerView.visibility = View.GONE
+            binding.btnManualAdd.visibility = View.GONE
+            binding.etArticleCode.visibility = View.VISIBLE
+            binding.btnAdd.visibility = View.VISIBLE
         }
     }
 }

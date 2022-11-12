@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.ksharshembie.whint.App
 import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentStockInBinding
 
@@ -21,11 +24,19 @@ class StockInFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnScan.setOnClickListener {
-            findNavController().navigate(R.id.scanFragment)
+        binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.stockInAddFragment)
         }
+        binding.btnCancel.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.btnSave.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
     }
 
 }
