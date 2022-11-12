@@ -26,8 +26,7 @@ class ScanFragment : Fragment() {
     private lateinit var codeScanner: CodeScanner
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentScanBinding.inflate(LayoutInflater.from(context), container, false)
@@ -40,28 +39,28 @@ class ScanFragment : Fragment() {
         codeScanner()
         viewVisibility()
         binding.btnAdd.setOnClickListener {
-            if (!App.db.dao().isRowIsExist(binding.etArticleCode.text.toString())) {
-                App.db.dao().insert(
-                    Article(
-                        articleCode = binding.etArticleCode.text.toString()
-                    )
-                )
-                Toast.makeText(
-                    requireActivity(),
-                    "New Article found: ${binding.etArticleCode.text}",
-                    Toast.LENGTH_LONG
-                ).show()
-
-            } else {
-                Toast.makeText(
-                    requireActivity(),
-                    "Scan result: ${binding.etArticleCode.text}",
-                    Toast.LENGTH_LONG
-                ).show()
-
-            }
-            findNavController().navigateUp()
+            isArticleExists(binding.etArticleCode.text.toString())
         }
+    }
+
+    private fun isArticleExists(it: String) {
+        if (!App.db.dao().isRowIsExist(it)) {
+            App.db.dao().insert(
+                Article(
+                    articleCode = it
+                )
+            )
+            Toast.makeText(
+                requireActivity(), "New Article found: ${it}", Toast.LENGTH_LONG
+            ).show()
+
+        } else {
+            Toast.makeText(
+                requireActivity(), "Scan result: ${it}", Toast.LENGTH_LONG
+            ).show()
+
+        }
+        findNavController().navigateUp()
     }
 
 
@@ -78,33 +77,14 @@ class ScanFragment : Fragment() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             requireActivity().runOnUiThread {
-                if (!App.db.dao().isRowIsExist(it.text.toString())) {
-                    App.db.dao().insert(
-                        Article(
-                            articleCode = it.text.toString()
-                        )
-                    )
-                    Toast.makeText(
-                        requireActivity(),
-                        "New Article found: ${it.text}",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                } else {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Scan result: ${it.text}",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                }
-                findNavController().navigateUp()
+                isArticleExists(it.text.toString())
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             requireActivity().runOnUiThread {
                 Toast.makeText(
-                    requireActivity(), "Camera initialization error: ${it.message}",
+                    requireActivity(),
+                    "Camera initialization error: ${it.message}",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -129,18 +109,14 @@ class ScanFragment : Fragment() {
             ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.CAMERA)
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.CAMERA),
-                CAMERA_REQUEST_CODE
+                requireActivity(), arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE
             )
         }
     }
 
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
