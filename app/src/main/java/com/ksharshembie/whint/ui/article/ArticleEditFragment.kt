@@ -31,6 +31,7 @@ class ArticleEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setFragmentResultListener("article_code") { key, bundle ->
             article = bundle.getSerializable("code") as Article
+            binding.tvArticleCode.text = article.articleCode.toString()
         }
 
 

@@ -11,7 +11,7 @@ class App : Application() {
         db = Room.databaseBuilder(
             applicationContext,
             Database::class.java, "database"
-        ).allowMainThreadQueries().build()
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
     }
 
     companion object {

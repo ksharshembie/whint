@@ -41,7 +41,12 @@ class ScanFragment : Fragment() {
         codeScanner()
         viewVisibility()
         binding.btnAdd.setOnClickListener {
-            isArticleExists(binding.etArticleCode.text.toString())
+            if (binding.etArticleCode.text.isEmpty()) {
+                Toast.makeText(requireActivity(),"Please enter Barcode", Toast.LENGTH_LONG).show()
+            } else {
+                isArticleExists(binding.etArticleCode.text.toString())
+            }
+
         }
     }
 
