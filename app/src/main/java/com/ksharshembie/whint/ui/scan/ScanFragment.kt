@@ -18,6 +18,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.ksharshembie.whint.App
+import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentScanBinding
 import com.ksharshembie.whint.local.room.Article
 
@@ -42,7 +43,11 @@ class ScanFragment : Fragment() {
         viewVisibility()
         binding.btnAdd.setOnClickListener {
             if (binding.etArticleCode.text.isEmpty()) {
-                Toast.makeText(requireActivity(),"Please enter Barcode", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireActivity(),
+                    getString(R.string.please_enter_barcode),
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
                 isArticleExists(binding.etArticleCode.text.toString())
             }
@@ -67,7 +72,7 @@ class ScanFragment : Fragment() {
             ).show()
 
         }
-        setFragmentResult("scan_result", bundleOf("article" to it))
+        setFragmentResult(SCAN_RESULT, bundleOf(ARTICLE to it))
         findNavController().navigateUp()
     }
 
@@ -131,7 +136,7 @@ class ScanFragment : Fragment() {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(
                         requireActivity(),
-                        "You need the camera permission to be able to use this app",
+                        getString(R.string.you_need_the_camera_permission),
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
@@ -148,5 +153,10 @@ class ScanFragment : Fragment() {
             binding.etArticleCode.visibility = View.VISIBLE
             binding.btnAdd.visibility = View.VISIBLE
         }
+    }
+
+    companion object{
+        const val SCAN_RESULT = "scan_result"
+        const val ARTICLE = "article"
     }
 }

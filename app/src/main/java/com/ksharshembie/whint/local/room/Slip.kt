@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 data class Slip(
     @PrimaryKey(autoGenerate = true)
     var idSlip: Long? = null,
-    var slipNumber: String,
-    var slipDate: Long,
+    var slipNumber: String? = null,
+    var slipDate: Long? = null,
     var idDate: Long,
     var idChangeDate: Long? = null,
     var idCancelDate: Long? = null,
     var idVendor: Long? = null,
-    var netAmount: String,
-    var vatAmount: String,
-    var totalAmount: String
+    var netAmount: String? = null,
+    var vatAmount: String? = null,
+    var totalAmount: String? = null
 )

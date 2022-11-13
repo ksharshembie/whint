@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/dft_padding"
     tools:context=".ui.home.stockIn.StockInAddFragment">
 
     <TextView
         android:id="@+id/tv_articleName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Article Name"
+        android:hint="@string/article_name"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/tv_articleCode"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Article Code"
+        android:hint="@string/article_code"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_articleName" />
@@ -30,7 +30,7 @@
         android:id="@+id/articleID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Article ID"
+        android:hint="@string/article_id"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_articleCode" />
@@ -49,7 +49,7 @@
         android:id="@+id/et_quantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Quantity"
+        android:hint="@string/quantity"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@id/et_articlePrice" />
 
@@ -57,7 +57,7 @@
         android:id="@+id/et_articlePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Article Price"
+        android:hint="@string/article_price"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@id/btn_add" />
 
@@ -65,7 +65,7 @@
         android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="exit"
+        android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_scan"
         app:layout_constraintStart_toStartOf="parent" />
@@ -74,7 +74,7 @@
         android:id="@+id/btn_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan"
+        android:text="@string/scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -83,7 +83,7 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_scan" />

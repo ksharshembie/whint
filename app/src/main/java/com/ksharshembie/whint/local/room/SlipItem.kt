@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class SlipItem(
     @PrimaryKey(autoGenerate = true)
     var idSlipItem: Long? = null,
-    var idSlip: Long,
+    var idSlip: Long? = null,
     var idArticle: Long,
     var quantity: Int,
     var price: Long,

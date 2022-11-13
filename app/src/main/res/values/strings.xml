@@ -6,4 +6,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_stock_in">Stock In</string>
+    <string name="please_fill_all_fields">Please fill all fields</string>
+    <string name="please_enter_barcode">Please enter Barcode</string>
+    <string name="you_need_the_camera_permission">You need the camera permission to be able to use this app</string>
+    <string name="stock_in">Stock In</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="article_name">Article Name</string>
+    <string name="article_code">Article Code</string>
+    <string name="article_id">Article ID</string>
+    <string name="quantity">Quantity</string>
+    <string name="article_price">Article Price</string>
+    <string name="exit">exit</string>
+    <string name="scan">Scan</string>
+    <string name="add_manual">Add Manual</string>
 </resources>
