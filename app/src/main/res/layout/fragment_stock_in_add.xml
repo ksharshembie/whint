@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_articleName"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Article Name"
         android:textSize="24sp"
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/tv_articleCode"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Article Code"
         android:textSize="20sp"
@@ -34,6 +34,15 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_articleCode" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_edit_24"
+        app:layout_constraintTop_toTopOf="@id/tv_articleName"
+        app:layout_constraintStart_toEndOf="@id/tv_articleName"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/et_quantity"

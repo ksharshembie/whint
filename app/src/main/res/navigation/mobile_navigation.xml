@@ -37,4 +37,9 @@
         android:name="com.ksharshembie.whint.ui.home.stockIn.StockInAddFragment"
         android:label="Stock in Add"
         tools:layout="@layout/fragment_stock_in_add" />
+    <fragment
+        android:id="@+id/articleEditFragment"
+        android:name="com.ksharshembie.whint.ui.article.ArticleEditFragment"
+        android:label="Article Update"
+        tools:layout="@layout/fragment_article_edit" />
 </navigation>

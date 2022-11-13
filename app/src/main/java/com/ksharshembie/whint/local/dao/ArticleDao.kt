@@ -3,6 +3,7 @@ package com.ksharshembie.whint.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.ksharshembie.whint.local.room.Article
 
 @Dao
@@ -16,4 +17,7 @@ interface ArticleDao {
 
     @Query("SELECT EXISTS(SELECT * FROM article WHERE articleCode = :code)")
     fun isRowIsExist(code : String) : Boolean
+
+    @Update
+    fun updateArticle(article: Article)
 }

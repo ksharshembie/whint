@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
@@ -60,6 +62,7 @@ class ScanFragment : Fragment() {
             ).show()
 
         }
+        setFragmentResult("scan_result", bundleOf("article" to it))
         findNavController().navigateUp()
     }
 
