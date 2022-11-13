@@ -33,8 +33,10 @@ class ArticleEditFragment : Fragment() {
             article = bundle.getSerializable("code") as Article
         }
 
+
         binding.btnSave.setOnClickListener {
             articleDataEdit(article)
+            setFragmentResult("updated_data", bundleOf("updated_article" to article))
             findNavController().navigateUp()
         }
     }

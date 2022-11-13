@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_edit_24"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/tv_articleName"
         app:layout_constraintStart_toEndOf="@id/tv_articleName"
         android:layout_height="wrap_content"/>

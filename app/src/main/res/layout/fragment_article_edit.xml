@@ -23,6 +23,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Article Name"
+        android:inputType="textCapCharacters"
         android:textSize="24sp"
         android:textStyle="bold" />
 

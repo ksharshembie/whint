@@ -43,15 +43,27 @@ class StockInAddFragment : Fragment() {
         setFragmentResultListener("scan_result") { key, bundle ->
             binding.tvArticleCode.text = bundle.getString("article")
             articleDataCheck(bundle.getString("article").toString())
+            binding.fabEdit.visibility = View.VISIBLE
         }
         binding.fabEdit.setOnClickListener {
-            article = Article(binding.articleID.text.toString().toLong(),binding.tvArticleCode.text.toString())
+            article = Article(
+                binding.articleID.text.toString().toLong(),
+                binding.tvArticleCode.text.toString()
+            )
             setFragmentResult(
-                    "article_code", bundleOf(
+                "article_code", bundleOf(
                     "code" to article
                 )
             )
             findNavController().navigate(R.id.articleEditFragment)
+        }
+        setFragmentResultListener("updated_data") { key, bundle ->
+            article = bundle.getSerializable("updated_article") as Article
+            binding.apply {
+                tvArticleCode.text = article.articleCode.toString()
+                tvArticleName.text = article.articleName.toString()
+                articleID.text = article.idArticle.toString()
+            }
         }
     }
 
