@@ -9,6 +9,8 @@ data class SlipItem(
     var idSlipItem: Long? = null,
     var idSlip: Long? = null,
     var idArticle: Long,
+    var articleCode: String,
+    var articleName: String,
     var quantity: Int,
     var price: Long,
     var idDate: Long

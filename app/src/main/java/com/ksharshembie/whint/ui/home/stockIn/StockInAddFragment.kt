@@ -23,7 +23,7 @@ class StockInAddFragment : Fragment() {
     private lateinit var binding: FragmentStockInAddBinding
     private lateinit var article: Article
     private lateinit var slipItem: SlipItem
-    private var slipID: Long? = null
+    private var slipID: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +65,7 @@ class StockInAddFragment : Fragment() {
         setFragmentResultListener(ArticleEditFragment.UPDATED_DATA) { _, bundle ->
             article = bundle.getSerializable(ArticleEditFragment.UPDATED_ARTICLE) as Article
             binding.apply {
-                tvArticleCode.text = article.articleCode.toString()
+                tvArticleCode.text = article.articleCode
                 tvArticleName.text = article.articleName.toString()
                 articleID.text = article.idArticle.toString()
             }
@@ -80,7 +80,9 @@ class StockInAddFragment : Fragment() {
                     idArticle = binding.articleID.text.toString().toLong(),
                     quantity = binding.etQuantity.text.toString().toInt(),
                     price = binding.etArticlePrice.text.toString().toLong(),
-                    idDate = System.currentTimeMillis()
+                    idDate = System.currentTimeMillis(),
+                    articleCode = binding.tvArticleCode.text.toString(),
+                    articleName = binding.tvArticleName.text.toString()
                 )
                 App.db.daoSlipItem().insert(slipItem)
             } else {
@@ -98,7 +100,7 @@ class StockInAddFragment : Fragment() {
         setFragmentResultListener(StockInFragment.SLIP_ID) { _, bundle ->
             slipID = bundle.getLong(StockInFragment.ID).toString().toLong()
         }
-        return slipID!!.toLong()
+        return slipID
     }
 
     private fun articleDataCheck(article: String) {

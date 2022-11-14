@@ -9,7 +9,7 @@ data class Slip(
     var idSlip: Long? = null,
     var slipNumber: String? = null,
     var slipDate: Long? = null,
-    var idDate: Long,
+    var idDate: Long = System.currentTimeMillis(),
     var idChangeDate: Long? = null,
     var idCancelDate: Long? = null,
     var idVendor: Long? = null,
