@@ -23,6 +23,9 @@ class StockInFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = StockInAdapter()
+        val slip = Slip()
+        App.db.daoSlip().insert(slip)
+        idSlip = App.db.daoSlip().getID(slip.idDate).toString().toLong()
     }
 
 
@@ -41,9 +44,6 @@ class StockInFragment : Fragment() {
 
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.stockInAddFragment)
-            val slip = Slip()
-            App.db.daoSlip().insert(slip)
-            idSlip = App.db.daoSlip().getID(slip.idDate).toString().toLong()
             setFragmentResult(SLIP_ID, bundleOf(ID to idSlip))
         }
         binding.btnCancel.setOnClickListener {
