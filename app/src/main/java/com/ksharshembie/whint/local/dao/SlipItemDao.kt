@@ -12,4 +12,10 @@ interface SlipItemDao {
 
     @Query("Select * from slipitem where idSlip = :slipId")
     fun getSlipItems(slipId: Long):List<SlipItem>
+
+    @Query("DELETE FROM slipitem where idSlip =:slipID")
+    fun deleteSlipItem(slipID: Long)
+
+    @Query("SELECT EXISTS(SELECT * FROM slipitem where idSlip = :slipID)")
+    fun isSlipItemExist(slipID: Long): Boolean
 }

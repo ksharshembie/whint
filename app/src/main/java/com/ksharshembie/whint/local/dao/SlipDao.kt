@@ -1,6 +1,7 @@
 package com.ksharshembie.whint.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.ksharshembie.whint.local.room.Slip
@@ -10,6 +11,19 @@ interface SlipDao {
     @Insert
     fun insert(slip: Slip)
 
+    @Query("SELECT * FROM slip WHERE idDate = :slipID")
+    fun getSlipByID(slipID: Long): Slip
+
     @Query("SELECT idSlip FROM slip WHERE idDate = :date")
     fun getID(date: Long): Long
+
+    @Query("DELETE FROM slip where idSlip =:slipID")
+    fun deleteSlip(slipID: Long)
+
+    @Query("SELECT EXISTS(SELECT * FROM slip where idSlip = :slipID)")
+    fun isSlipExist(slipID: Long): Boolean
+
+    @Query("SELECT isSaved FROM slip where idSlip = :slipID")
+    fun isSlipSaved(slipID: Long): Boolean
+
 }

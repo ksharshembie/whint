@@ -1,10 +1,12 @@
 package com.ksharshembie.whint.ui.home.stockIn
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
@@ -61,6 +63,23 @@ class StockInFragment : Fragment() {
     companion object {
         const val SLIP_ID = "slipID"
         const val ID = "id"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("slipID", "SlipID on Destroy: ${idSlip}")
+        isSlipSaved(idSlip)
+    }
+
+    fun isSlipSaved(slipID: Long) {
+        if (App.db.daoSlip().isSlipExist(slipID) && !App.db.daoSlip().isSlipSaved(slipID)) {
+            if (App.db.daoSlipItem().isSlipItemExist(slipID)) {
+                App.db.daoSlipItem().deleteSlipItem(slipID)
+                Log.e("slipID", "SlipItems with ID: ${slipID} deleted")
+            }
+            App.db.daoSlip().deleteSlip(slipID)
+            Log.e("slipID", "Slips with ID: ${slipID} deleted")
+        }
     }
 
 
