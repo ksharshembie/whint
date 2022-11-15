@@ -52,7 +52,7 @@ class StockInFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.btnSave.setOnClickListener {
-            saveSlip(idSlip)
+            saveSlip(idSlip, binding.etSlipNumber.text.toString())
         }
         list = App.db.daoSlipItem().getSlipItems(idSlip)
         binding.rvSlipItems.adapter = adapter
@@ -82,14 +82,27 @@ class StockInFragment : Fragment() {
         }
     }
 
-    fun saveSlip(slipID: Long) {
+    fun saveSlip(slipID: Long, docNumber: String) {
         if (!App.db.daoSlipItem().isSlipItemExist(slipID)) {
-            Toast.makeText(requireContext(), getString(R.string.no_item_added_please_add), Toast.LENGTH_LONG)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_item_added_please_add),
+                Toast.LENGTH_LONG
+            )
                 .show()
         } else {
-            App.db.daoSlip().slipSaved(slipID)
-            Log.e("slipID", "Slips with ID: ${slipID} saved")
-            findNavController().navigateUp()
+            if (docNumber.isEmpty()) {
+                Toast.makeText(
+                    requireActivity(),
+                    getString(R.string.please_fill_all_fields),
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+            } else {
+                App.db.daoSlip().slipSaved(slipID, docNumber)
+                Log.e("slipID", "Slips with ID: ${slipID} saved")
+                findNavController().navigateUp()
+            }
         }
     }
 
