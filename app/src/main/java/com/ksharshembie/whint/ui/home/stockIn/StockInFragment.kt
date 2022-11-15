@@ -84,7 +84,7 @@ class StockInFragment : Fragment() {
 
     fun saveSlip(slipID: Long) {
         if (!App.db.daoSlipItem().isSlipItemExist(slipID)) {
-            Toast.makeText(requireContext(), "No items added, please Add!", Toast.LENGTH_LONG)
+            Toast.makeText(requireContext(), getString(R.string.no_item_added_please_add), Toast.LENGTH_LONG)
                 .show()
         } else {
             App.db.daoSlip().slipSaved(slipID)
