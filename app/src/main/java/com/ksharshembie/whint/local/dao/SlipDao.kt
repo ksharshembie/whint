@@ -26,7 +26,7 @@ interface SlipDao {
     @Query("SELECT isSaved FROM slip where idSlip = :slipID")
     fun isSlipSaved(slipID: Long): Boolean
 
-    @Query("UPDATE slip SET isSaved = 1, slipNumber = :docNumber, slipDate = :docDate WHERE idSlip = :slipID")
-    fun slipSaved(slipID: Long, docNumber: String, docDate: String)
+    @Query("UPDATE slip SET isSaved = 1, slipNumber = :docNumber, slipDate = :docDate, netAmount = :netAmount WHERE idSlip = :slipID")
+    fun slipSaved(slipID: Long, docNumber: String, docDate: String, netAmount: String)
 
 }

@@ -62,13 +62,16 @@ class StockInFragment : Fragment() {
             saveSlip(
                 idSlip,
                 binding.etSlipNumber.text.toString(),
-                binding.tvSlipDate.text.toString()
+                binding.tvSlipDate.text.toString(),
+                binding.tvNetAmount.text.toString()
             )
         }
         list = App.db.daoSlipItem().getSlipItems(idSlip)
+        Log.e("SlipItem", "SlipItems: ${list}}")
         binding.rvSlipItems.adapter = adapter
         adapter.addItem(list)
         slipDatePicker()
+        netAmountSum(list)
     }
 
     private fun slipDatePicker() {
@@ -108,15 +111,15 @@ class StockInFragment : Fragment() {
         }
     }
 
-    private fun saveSlip(slipID: Long, docNumber: String, docDate: String) {
+    private fun saveSlip(slipID: Long, docNumber: String, docDate: String, netAmount: String) {
         if (!App.db.daoSlipItem().isSlipItemExist(slipID)) {
             showToast(getString(R.string.no_item_added_please_add))
         } else if (docNumber.isEmpty()) {
             showToast(getString(R.string.please_fill_doc_number))
-        } else if (!docDate.equals(R.string.document_date)) {
+        } else if (docDate == getString(R.string.document_date)) {
             showToast(getString(R.string.please_select_doc_date))
         } else {
-            App.db.daoSlip().slipSaved(slipID, docNumber, docDate)
+            App.db.daoSlip().slipSaved(slipID, docNumber, docDate, netAmount)
             findNavController().navigateUp()
         }
     }
@@ -130,5 +133,11 @@ class StockInFragment : Fragment() {
             .show()
     }
 
-
+    private fun netAmountSum(list: List<SlipItem>) {
+        var sum: Long = 0
+        for ((i, element) in list.withIndex()) {
+            sum = sum + element.price.toString().toLong() * element.quantity.toString().toLong()
+        }
+        binding.tvNetAmount.text = sum.toString()
+    }
 }
