@@ -85,6 +85,12 @@ class StockInAddFragment : Fragment() {
                     articleName = binding.tvArticleName.text.toString()
                 )
                 App.db.daoSlipItem().insert(slipItem)
+                Toast.makeText(
+                    requireActivity(),
+                    getString(R.string.item_saved),
+                    Toast.LENGTH_LONG
+                )
+                    .show()
             } else {
                 Toast.makeText(
                     requireActivity(),

@@ -8,7 +8,7 @@ data class Slip(
     @PrimaryKey(autoGenerate = true)
     var idSlip: Long? = null,
     var slipNumber: String? = null,
-    var slipDate: Long? = null,
+    var slipDate: String? = null,
     var idDate: Long = System.currentTimeMillis(),
     var idChangeDate: Long? = null,
     var idCancelDate: Long? = null,
