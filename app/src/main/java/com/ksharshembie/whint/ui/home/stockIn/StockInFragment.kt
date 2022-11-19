@@ -109,12 +109,11 @@ class StockInFragment : Fragment() {
     }
 
     private fun saveSlip(slipID: Long, docNumber: String, docDate: String) {
-        Log.e("SlipID", "Doc Date = [${docDate}]")
         if (!App.db.daoSlipItem().isSlipItemExist(slipID)) {
             showToast(getString(R.string.no_item_added_please_add))
         } else if (docNumber.isEmpty()) {
             showToast(getString(R.string.please_fill_doc_number))
-        } else if (docDate == "Select Date") {
+        } else if (!docDate.equals(R.string.document_date)) {
             showToast(getString(R.string.please_select_doc_date))
         } else {
             App.db.daoSlip().slipSaved(slipID, docNumber, docDate)
