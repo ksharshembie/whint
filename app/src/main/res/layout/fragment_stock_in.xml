@@ -45,9 +45,10 @@
         android:id="@+id/netAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NetAmount:"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="NetAmount:"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/rv_slipItems"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_slipNumber" />
@@ -57,10 +58,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="NetAmount:"
-        app:layout_constraintBottom_toTopOf="@id/rv_slipItems"
+        android:text="NetAmount"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/netAmount"
         app:layout_constraintStart_toEndOf="@id/netAmount"
-        app:layout_constraintTop_toBottomOf="@id/et_slipNumber" />
+        app:layout_constraintTop_toTopOf="@id/netAmount" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="Quantity:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/rv_slipItems"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/netAmount" />
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Quantity"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/quantity"
+        app:layout_constraintStart_toEndOf="@id/quantity"
+        app:layout_constraintTop_toTopOf="@id/quantity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_slipItems"
@@ -69,7 +94,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/netAmount" />
+        app:layout_constraintTop_toBottomOf="@id/quantity" />
 
 
     <Button

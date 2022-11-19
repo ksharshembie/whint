@@ -71,7 +71,7 @@ class StockInFragment : Fragment() {
         binding.rvSlipItems.adapter = adapter
         adapter.addItem(list)
         slipDatePicker()
-        netAmountSum(list)
+        totalCalculate(list)
     }
 
     private fun slipDatePicker() {
@@ -133,11 +133,17 @@ class StockInFragment : Fragment() {
             .show()
     }
 
-    private fun netAmountSum(list: List<SlipItem>) {
+    private fun totalCalculate(list: List<SlipItem>) {
         var sum: Long = 0
+        var quantity: Long = 0
         for ((i, element) in list.withIndex()) {
             sum = sum + element.price.toString().toLong() * element.quantity.toString().toLong()
+            quantity = quantity + element.quantity.toString().toLong()
         }
-        binding.tvNetAmount.text = sum.toString()
+        binding.apply {
+            tvNetAmount.text = sum.toString()
+            tvQuantity.text = quantity.toString()
+        }
+
     }
 }
