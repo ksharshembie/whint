@@ -15,6 +15,9 @@ interface ArticleDao {
     @Query("SELECT * FROM article WHERE articleCode = :code")
     fun getArticle(code : String): Article
 
+    @Query("SELECT * FROM article WHERE idArticle = :id")
+    fun getArticlebyID(id : Long): Article
+
     @Query("SELECT EXISTS(SELECT * FROM article WHERE articleCode = :code)")
     fun isRowIsExist(code : String) : Boolean
 

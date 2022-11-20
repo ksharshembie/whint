@@ -80,9 +80,7 @@ class StockInAddFragment : Fragment() {
                     idArticle = binding.articleID.text.toString().toLong(),
                     quantity = binding.etQuantity.text.toString().toInt(),
                     price = binding.etArticlePrice.text.toString().toLong(),
-                    idDate = System.currentTimeMillis(),
-                    articleCode = binding.tvArticleCode.text.toString(),
-                    articleName = binding.tvArticleName.text.toString()
+                    idDate = System.currentTimeMillis()
                 )
                 App.db.daoSlipItem().insert(slipItem)
                 Toast.makeText(
