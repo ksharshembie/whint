@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.ksharshembie.whint.App
 import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentStockInBinding
-import com.ksharshembie.whint.local.room.Article
 import com.ksharshembie.whint.local.room.Slip
 import com.ksharshembie.whint.local.room.SlipItem
 import java.util.Calendar
@@ -28,7 +27,6 @@ class StockInFragment : Fragment() {
     private val year = calendar.get(Calendar.YEAR)
     private val month = calendar.get(Calendar.MONTH)
     private val day = calendar.get(Calendar.DAY_OF_MONTH)
-    private lateinit var listArticle: List<Article>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,7 +119,7 @@ class StockInFragment : Fragment() {
         } else if (docDate == getString(R.string.document_date)) {
             showToast(getString(R.string.please_select_doc_date))
         } else {
-            App.db.daoSlip().slipSaved(slipID, docNumber, docDate, netAmount)
+            App.db.daoSlip().slipSaved(slipID, docNumber, docDate, netAmount, 1)
             findNavController().navigateUp()
         }
     }

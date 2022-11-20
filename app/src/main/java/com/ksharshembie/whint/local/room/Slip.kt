@@ -16,5 +16,8 @@ data class Slip(
     var netAmount: String? = null,
     var vatAmount: String? = null,
     var totalAmount: String? = null,
-    var isSaved: Boolean = false
+    var isSaved: Boolean = false,
+    var idStockTo: Long? = null,
+    var idStockFrom: Long? = null,
+    var idSlipType: Long? = null
 )
