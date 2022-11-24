@@ -11,10 +11,17 @@ import androidx.navigation.fragment.findNavController
 import com.ksharshembie.whint.App
 import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentHomeBinding
+import com.ksharshembie.whint.local.room.Stock
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var stock: List<Stock>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        systemStockCheck()
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -27,15 +34,8 @@ class HomeFragment : Fragment() {
     ): View {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,10 +43,38 @@ class HomeFragment : Fragment() {
         binding.btnStockIn.setOnClickListener {
             findNavController().navigate(R.id.stockInFragment)
         }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun systemStockCheck() {
+        if (App.db.daoStock().isSystemStockExist()) {
+            stock = App.db.daoStock().getSystemStock()
+        } else {
+            val stock01 = Stock(
+                idStock = 0,
+                code = "01",
+                name = getString(R.string.main_stock),
+                isSystemStock = true
+            )
+            val stock02 = Stock(
+                idStock = 0,
+                code = "02",
+                name = getString(R.string.damaged_stock),
+                isSystemStock = true
+            )
+            val stock03 = Stock(
+                idStock = 0,
+                code = "03",
+                name = getString(R.string.return_stock),
+                isSystemStock = true
+            )
+            App.db.daoStock().insert(listOf(stock01, stock02, stock03))
+        }
+    }
+
 }

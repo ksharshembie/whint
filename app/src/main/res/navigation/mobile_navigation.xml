@@ -42,4 +42,9 @@
         android:name="com.ksharshembie.whint.ui.article.ArticleEditFragment"
         android:label="Article Update"
         tools:layout="@layout/fragment_article_edit" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ksharshembie.whint.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

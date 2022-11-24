@@ -28,4 +28,8 @@
     <string name="document_date">Document Date</string>
     <string name="please_fill_doc_number">Please fill Document Number</string>
     <string name="please_select_doc_date">Please Select Document Date</string>
+    <string name="title_profile">Profile</string>
+    <string name="main_stock">Main</string>
+    <string name="damaged_stock">Damaged</string>
+    <string name="return_stock">Return</string>
 </resources>

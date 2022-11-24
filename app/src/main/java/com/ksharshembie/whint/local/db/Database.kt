@@ -5,11 +5,12 @@ import androidx.room.RoomDatabase
 import com.ksharshembie.whint.local.dao.*
 import com.ksharshembie.whint.local.room.*
 
-@Database(entities = [Article::class, Slip::class, SlipItem::class, Stock::class, SlipType::class], version = 9)
+@Database(entities = [Article::class, Slip::class, SlipItem::class, Stock::class, SlipType::class, StockCount::class], version = 12)
 abstract class Database : RoomDatabase() {
     abstract fun dao(): ArticleDao
     abstract fun daoSlip(): SlipDao
     abstract fun daoSlipItem(): SlipItemDao
     abstract fun daoSlipType(): SlipTypeDao
     abstract fun daoStock(): StockDao
+    abstract fun daoStockCount(): StockCountDao
 }

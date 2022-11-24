@@ -29,14 +29,15 @@ interface SlipDao {
     @Query(
         "UPDATE slip SET isSaved = 1, slipNumber = :docNumber, slipDate = :docDate, " +
                 "netAmount = :netAmount, vatAmount = 0, totalAmount = :netAmount, " +
-                "idSlipType = :idSlipType WHERE idSlip = :slipID"
+                "idSlipType = :idSlipType, idStockTo = :stockID WHERE idSlip = :slipID"
     )
     fun slipSaved(
         slipID: Long,
         docNumber: String,
         docDate: String,
         netAmount: String,
-        idSlipType: Long
+        idSlipType: Long,
+        stockID: Long
     )
 
 }

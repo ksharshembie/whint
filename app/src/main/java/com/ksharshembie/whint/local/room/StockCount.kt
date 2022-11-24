@@ -4,11 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Stock(
+data class StockCount(
     @PrimaryKey(autoGenerate = true)
+    var idStocks: Long? = null,
+    var idArticle: Long,
     var idStock: Long,
-    var code: String,
-    var name: String,
-    var address: String? = null,
-    var isSystemStock: Boolean
+    var quantity: Int
 )

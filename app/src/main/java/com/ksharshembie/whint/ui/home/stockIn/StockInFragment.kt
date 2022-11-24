@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
@@ -16,6 +19,7 @@ import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentStockInBinding
 import com.ksharshembie.whint.local.room.Slip
 import com.ksharshembie.whint.local.room.SlipItem
+import com.ksharshembie.whint.local.room.StockCount
 import java.util.Calendar
 
 class StockInFragment : Fragment() {
@@ -27,6 +31,8 @@ class StockInFragment : Fragment() {
     private val year = calendar.get(Calendar.YEAR)
     private val month = calendar.get(Calendar.MONTH)
     private val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private lateinit var option: Spinner
+    private var stockID: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,21 +64,24 @@ class StockInFragment : Fragment() {
         binding.btnCancel.setOnClickListener {
             findNavController().navigateUp()
         }
-        binding.btnSave.setOnClickListener {
-            saveSlip(
-                idSlip,
-                binding.etSlipNumber.text.toString(),
-                binding.tvSlipDate.text.toString(),
-                binding.tvNetAmount.text.toString()
-            )
-        }
+        setStockID()
         list = App.db.daoSlipItem().getSlipItems(idSlip)
         Log.e("SlipItem", "SlipItems: ${list}}")
         binding.rvSlipItems.adapter = adapter
         adapter.addItem(list)
         slipDatePicker()
         totalCalculate(list)
+        binding.btnSave.setOnClickListener {
+            saveSlip(
+                idSlip,
+                binding.etSlipNumber.text.toString(),
+                binding.tvSlipDate.text.toString(),
+                binding.tvNetAmount.text.toString(),
+                stockID
+            )
+        }
     }
+
 
     private fun slipDatePicker() {
         //Calendar
@@ -111,7 +120,13 @@ class StockInFragment : Fragment() {
         }
     }
 
-    private fun saveSlip(slipID: Long, docNumber: String, docDate: String, netAmount: String) {
+    private fun saveSlip(
+        slipID: Long,
+        docNumber: String,
+        docDate: String,
+        netAmount: String,
+        stockID: Long
+    ) {
         if (!App.db.daoSlipItem().isSlipItemExist(slipID)) {
             showToast(getString(R.string.no_item_added_please_add))
         } else if (docNumber.isEmpty()) {
@@ -119,7 +134,8 @@ class StockInFragment : Fragment() {
         } else if (docDate == getString(R.string.document_date)) {
             showToast(getString(R.string.please_select_doc_date))
         } else {
-            App.db.daoSlip().slipSaved(slipID, docNumber, docDate, netAmount, 1)
+            App.db.daoSlip().slipSaved(slipID, docNumber, docDate, netAmount, 1, stockID)
+            stockIn(slipID)
             findNavController().navigateUp()
         }
     }
@@ -136,14 +152,60 @@ class StockInFragment : Fragment() {
     private fun totalCalculate(list: List<SlipItem>) {
         var sum: Long = 0
         var quantity: Long = 0
-        for ((i, element) in list.withIndex()) {
-            sum = sum + element.price.toString().toLong() * element.quantity.toString().toLong()
-            quantity = quantity + element.quantity.toString().toLong()
+        list.forEach {
+            sum += it.price.toString().toLong() * it.quantity.toString().toLong()
+            quantity += it.quantity.toString().toLong()
         }
         binding.apply {
             tvNetAmount.text = sum.toString()
             tvQuantity.text = quantity.toString()
         }
 
+    }
+
+
+    private fun setStockID() {
+        val options = App.db.daoStock().getAllStock()
+        option = binding.spStore
+        option.adapter = ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            options
+        )
+        option.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                stockID = App.db.daoStock().getStockID(option.adapter.getItem(p2).toString())
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //
+            }
+
+        }
+    }
+
+    private fun stockIn(slipID: Long) {
+
+        val listSlipItem: List<SlipItem>
+        var stock: StockCount
+        val stockList = ArrayList<StockCount>()
+        var stockExists: StockCount
+        var stockIncreased: StockCount
+
+        listSlipItem = App.db.daoSlipItem().getSlipItems(slipID)
+        listSlipItem.forEach {
+            stock = StockCount(null, it.idArticle, stockID, it.quantity)
+            stockList.add(stock)
+        }
+        stockList.forEach {
+            if (!App.db.daoStockCount().isStockExist(it.idArticle, it.idStock)) {
+                App.db.daoStockCount().insert(it)
+            } else {
+                stockExists = App.db.daoStockCount().existStock(it.idArticle, it.idStock)
+                stockIncreased = StockCount(stockExists.idStocks, stockExists.idArticle, stockExists.idStock, it.quantity + stockExists.quantity)
+                App.db.daoStockCount().inreaseStocks(stockIncreased.idStocks, stockIncreased.quantity)
+            }
+
+        }
     }
 }

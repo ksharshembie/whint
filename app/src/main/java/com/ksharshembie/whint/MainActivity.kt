@@ -33,14 +33,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.stockInFragment,
                 R.id.scanFragment,
                 R.id.stockInAddFragment,
-                R.id.articleEditFragment
+                R.id.articleEditFragment,
+                R.id.profileFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             if (destination.id == R.id.navigation_home || destination.id == R.id.navigation_dashboard
-                || destination.id == R.id.navigation_notifications
+                || destination.id == R.id.navigation_notifications || destination.id == R.id.profileFragment
             ) {
                 navView.isVisible = true
             } else {

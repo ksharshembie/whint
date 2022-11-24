@@ -11,7 +11,6 @@
         android:id="@+id/et_slipNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:autofillHints="name"
         android:hint="@string/document_number"
         android:inputType="textCapCharacters"
@@ -25,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:paddingTop="12dp"
-        android:paddingBottom="16dp"
         android:text="@string/document_date"
         android:textAlignment="textEnd"
         android:textSize="16sp"
@@ -42,6 +40,38 @@
         app:layout_constraintTop_toTopOf="@id/tv_slipDate" />
 
     <TextView
+        android:id="@+id/store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="Warehouse:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/netAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_slipNumber" />
+
+    <Spinner
+        android:id="@+id/sp_store"
+        app:layout_constraintTop_toTopOf="@id/store"
+        app:layout_constraintBottom_toBottomOf="@id/store"
+        app:layout_constraintStart_toEndOf="@id/store"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Total"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/netAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/store" />
+
+    <TextView
         android:id="@+id/netAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +81,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/rv_slipItems"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_slipNumber" />
+        app:layout_constraintTop_toBottomOf="@id/total" />
 
     <TextView
         android:id="@+id/tv_netAmount"
