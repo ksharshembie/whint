@@ -19,4 +19,7 @@ interface StockCountDao {
 
     @Query("Update stockcount set quantity = :newStock where idStocks = :idStock")
     fun inreaseStocks(idStock: Long? = null, newStock: Int)
+
+    @Query("select * from stockcount order by idArticle, idStock")
+    fun getAllStock(): List<StockCount>
 }

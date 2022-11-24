@@ -17,8 +17,11 @@ interface StockDao {
     fun getSystemStock(): List<Stock>
 
     @Query("select name from stock ")
-    fun getAllStock(): List<String>
+    fun getStockNames(): List<String>
 
     @Query("select idStock from stock where name = :name ")
     fun getStockID(name: String): Long
+
+    @Query("select * from stock where idStock = :id ")
+    fun getStockNamebyID(id: Long): Stock
 }

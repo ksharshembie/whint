@@ -4,27 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ksharshembie.whint.App
 import com.ksharshembie.whint.R
 import com.ksharshembie.whint.databinding.FragmentHomeBinding
 import com.ksharshembie.whint.local.room.Stock
+import com.ksharshembie.whint.local.room.StockCount
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var stock: List<Stock>
+    private lateinit var adaptor: StockAdaptor
+    private lateinit var list: List<StockCount>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         systemStockCheck()
+        adaptor = StockAdaptor()
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,8 +32,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +41,9 @@ class HomeFragment : Fragment() {
         binding.btnStockIn.setOnClickListener {
             findNavController().navigate(R.id.stockInFragment)
         }
-
+        list = App.db.daoStockCount().getAllStock()
+        binding.rvStocks.adapter = adaptor
+        adaptor.addItem(list)
     }
 
     override fun onDestroyView() {

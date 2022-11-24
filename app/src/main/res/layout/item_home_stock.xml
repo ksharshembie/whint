@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/articleName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/article_name"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_articleName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/article_name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/articleName" />
+
+    <TextView
+        android:id="@+id/articleCode"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/article_code"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_articleName" />
+
+    <TextView
+        android:id="@+id/tv_articleCode"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/article_code"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/articleCode" />
+
+
+    <TextView
+        android:id="@+id/store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/articleCode"
+        app:layout_constraintBottom_toBottomOf="@id/articleCode"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/tv_storeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/store_name"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_articleCode"
+        app:layout_constraintBottom_toBottomOf="@id/tv_articleCode"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/quantity"
+        android:textAlignment="textEnd"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@id/articleName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/articleName" />
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/quantity"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_articleName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_articleName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

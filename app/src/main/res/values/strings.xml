@@ -32,4 +32,6 @@
     <string name="main_stock">Main</string>
     <string name="damaged_stock">Damaged</string>
     <string name="return_stock">Return</string>
+    <string name="store">Store:</string>
+    <string name="store_name">Store Name</string>
 </resources>

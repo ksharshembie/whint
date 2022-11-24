@@ -66,7 +66,6 @@ class StockInFragment : Fragment() {
         }
         setStockID()
         list = App.db.daoSlipItem().getSlipItems(idSlip)
-        Log.e("SlipItem", "SlipItems: ${list}}")
         binding.rvSlipItems.adapter = adapter
         adapter.addItem(list)
         slipDatePicker()
@@ -165,7 +164,7 @@ class StockInFragment : Fragment() {
 
 
     private fun setStockID() {
-        val options = App.db.daoStock().getAllStock()
+        val options = App.db.daoStock().getStockNames()
         option = binding.spStore
         option.adapter = ArrayAdapter<String>(
             requireContext(),
