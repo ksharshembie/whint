@@ -88,8 +88,9 @@ class StockInFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDay ->
+                    val cMonth = mMonth + 1
                     binding.tvSlipDate.setText(
-                        "$mDay/$mMonth/$mYear"
+                        "$mDay/$cMonth/$mYear"
                     )
                 },
                 year,
@@ -201,8 +202,14 @@ class StockInFragment : Fragment() {
                 App.db.daoStockCount().insert(it)
             } else {
                 stockExists = App.db.daoStockCount().existStock(it.idArticle, it.idStock)
-                stockIncreased = StockCount(stockExists.idStocks, stockExists.idArticle, stockExists.idStock, it.quantity + stockExists.quantity)
-                App.db.daoStockCount().inreaseStocks(stockIncreased.idStocks, stockIncreased.quantity)
+                stockIncreased = StockCount(
+                    stockExists.idStocks,
+                    stockExists.idArticle,
+                    stockExists.idStock,
+                    it.quantity + stockExists.quantity
+                )
+                App.db.daoStockCount()
+                    .inreaseStocks(stockIncreased.idStocks, stockIncreased.quantity)
             }
 
         }
