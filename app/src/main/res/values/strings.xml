@@ -34,4 +34,9 @@
     <string name="return_stock">Return</string>
     <string name="store">Store:</string>
     <string name="store_name">Store Name</string>
+    <string name="stock_transfer">Transfer</string>
+    <string name="stock_out">Stock Out</string>
+    <string name="title_stock_out">Stock Out</string>
+    <string name="warehouse">Warehouse:</string>
+    <string name="stock">Stock</string>
 </resources>

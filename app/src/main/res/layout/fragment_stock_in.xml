@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="16dp"
-        android:text="Warehouse:"
+        android:text="@string/warehouse"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/netAmount"
         app:layout_constraintStart_toStartOf="parent"

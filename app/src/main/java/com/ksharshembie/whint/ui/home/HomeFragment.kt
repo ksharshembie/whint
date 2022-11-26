@@ -44,6 +44,9 @@ class HomeFragment : Fragment() {
         list = App.db.daoStockCount().getAllStock()
         binding.rvStocks.adapter = adaptor
         adaptor.addItem(list)
+        binding.btnStockOut.setOnClickListener {
+            findNavController().navigate(R.id.stockOutFragment)
+        }
     }
 
     override fun onDestroyView() {

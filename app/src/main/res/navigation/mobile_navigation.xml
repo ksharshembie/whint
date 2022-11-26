@@ -47,4 +47,9 @@
         android:name="com.ksharshembie.whint.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/stockOutFragment"
+        android:name="com.ksharshembie.whint.ui.home.stockOut.StockOutFragment"
+        android:label="@string/title_stock_out"
+        tools:layout="@layout/fragment_stock_out" />
 </navigation>

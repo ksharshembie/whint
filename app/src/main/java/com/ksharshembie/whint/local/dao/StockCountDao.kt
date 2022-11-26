@@ -22,4 +22,7 @@ interface StockCountDao {
 
     @Query("select * from stockcount order by idArticle, idStock")
     fun getAllStock(): List<StockCount>
+
+    @Query("select * from stockcount where idStock = :stockID order by idArticle, idStock")
+    fun getAllStockByID(stockID: Long): List<StockCount>
 }
